@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;  
+}
+
+@layer base {
+  body {
+    @apply font-roboto bg-black text-white;
+  }
+  input:focus-visible {
+    outline: none;
+  }
+  #__next :is(button) {
+    @apply normal-case;
+  }
+}
