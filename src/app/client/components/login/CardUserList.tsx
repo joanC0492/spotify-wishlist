@@ -1,4 +1,4 @@
-import cn from "@/shared/helpers/cn";
+import { cn } from "@/app/client/helpers";
 
 interface Props {
   children: React.ReactNode;

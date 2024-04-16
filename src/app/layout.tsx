@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
-import { darkTheme } from "@/shared/components/Material";
 import { Roboto } from "next/font/google";
-import { Providers } from "@/store";
+import { ThemeDark } from "@/app/client/components/Theme";
+import { Providers } from "@/app/client/store";
 import "./globals.scss";
 
 const roboto = Roboto({
@@ -29,7 +29,7 @@ export default function RootLayout({
       <Providers>
         <body id="__next">
           <AppRouterCacheProvider>
-            <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>
+            <ThemeProvider theme={ThemeDark}>{children}</ThemeProvider>
           </AppRouterCacheProvider>
         </body>
       </Providers>
