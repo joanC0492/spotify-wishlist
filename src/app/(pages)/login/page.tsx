@@ -1,8 +1,11 @@
 import { NextPage } from "next";
-import { CardUserItem, CardUserList } from "@/app/client/components/login";
+import { CardUserItem, CardUserList } from "@/app/client/components/Login";
+import { getAllActiveUsers } from "@/app/client/services/user/getAllActiveUsers";
 import { cn } from "@/app/client/helpers";
+import { Alert } from "@mui/material";
 
-const LoginPage: NextPage = () => {
+const LoginPage: NextPage = async () => {
+  const users = await getAllActiveUsers();
   return (
     <div className="container">
       <div className="grid grid-cols-12 gap-4">
@@ -11,17 +14,25 @@ const LoginPage: NextPage = () => {
             <div className="bg-spotify-gray p-4 rounded-lg md:py-8 md:px-12">
               <div className="xl:max-w-xs xl:mx-auto">
                 <p className="text-2xl">¿Quién soy?</p>
-                <CardUserList className="grid grid-cols-12 gap-4 mt-5">
-                  {[...new Array(5)].map((_, i, array) => (
-                    <CardUserItem
-                      key={i}
-                      className={cn(
-                        "col-span-6 text-center",
-                        array.length === i + 1 && "col-start-4"
-                      )}
-                    />
-                  ))}
-                </CardUserList>
+
+                {users.length !== 0 ? (
+                  <CardUserList className="grid grid-cols-12 gap-4 mt-5">
+                    {users.map((user, i, array) => (
+                      <CardUserItem
+                        key={i}
+                        user={user}
+                        className={cn(
+                          "col-span-6 text-center",
+                          array.length === i + 1 && "col-start-4"
+                        )}
+                      />
+                    ))}
+                  </CardUserList>
+                ) : (
+                  <Alert severity="error" className="mt-5">
+                    No hay usuarios
+                  </Alert>
+                )}
               </div>
             </div>
           </div>

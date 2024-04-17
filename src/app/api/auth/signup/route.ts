@@ -1,25 +1,20 @@
 import { NextResponse } from "next/server";
 import { dbConnection } from "@/app/server/database";
-import { UserModel } from "@/app/server/models/user";
-import { User, UserResponse } from "@/types/user";
+import { UserModel } from "@/app/server/models";
+import { User, UserResponse } from "@/types/server/user";
 
 export const POST = async (request: Request) => {
-  let msg: string = "",
+  let msg: string = "signup",
     ok: boolean = true,
     data: UserResponse | null = null,
     status: number = 201;
 
   try {
     const { name, image, state, instrument }: User = await request.json();
-    const connection = await dbConnection();
-    console.log(connection);
+    await dbConnection();
     const userDoc = new UserModel({ name, image, state, instrument });
     await userDoc.save();
-    msg += "signup";
-    data = {
-      uid: userDoc.uid as string,
-      name: userDoc.name as string,
-    };
+    data = { uid: userDoc.uid as string, name: userDoc.name as string };
   } catch (err) {
     msg = "Error: ";
     if (err instanceof Error) msg += err.message;
