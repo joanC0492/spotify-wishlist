@@ -14,7 +14,8 @@ export const GET = async (request: Request) => {
     offset = Number(url.searchParams.get("offset")) || 0,
     queryUsersValid = { state: true };
   try {
-    await dbConnection();
+    const connection = await dbConnection();
+    console.log({ connection });
     const [users, totalUsers] = await Promise.all([
       UserModel.find(queryUsersValid).limit(limit).skip(offset),
       UserModel.countDocuments(queryUsersValid),
