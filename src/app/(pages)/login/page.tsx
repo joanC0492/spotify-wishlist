@@ -1,11 +1,12 @@
 import { NextPage } from "next";
-import { CardUserItem, CardUserList } from "@/app/client/components/Login";
 import { getAllActiveUsers } from "@/app/client/services/user/getAllActiveUsers";
-import { cn } from "@/app/client/helpers";
-import { Alert } from "@mui/material";
+// import { CardUserItem, CardUserList } from "@/app/client/components/Login";
+// import { cn } from "@/app/client/helpers";
+// import { Alert } from "@mui/material";
 
 const LoginPage: NextPage = async () => {
   const users = await getAllActiveUsers();
+  console.log(users);
   return (
     <div className="container">
       <div className="grid grid-cols-12 gap-4">
@@ -15,7 +16,7 @@ const LoginPage: NextPage = async () => {
               <div className="xl:max-w-xs xl:mx-auto">
                 <p className="text-2xl">¿Quién soy?</p>
 
-                {users.length !== 0 ? (
+                {/* {users.length !== 0 ? (
                   <CardUserList className="grid grid-cols-12 gap-4 mt-5">
                     {users.map((user, i, array) => (
                       <CardUserItem
@@ -32,7 +33,7 @@ const LoginPage: NextPage = async () => {
                   <Alert severity="error" className="mt-5">
                     No hay usuarios
                   </Alert>
-                )}
+                )} */}
               </div>
             </div>
           </div>
